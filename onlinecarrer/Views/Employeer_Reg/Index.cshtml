@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CarrerLib.Company>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.compNamae)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compBranch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compUsername)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.compNamae)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compBranch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compUsername)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.compId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.compId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.compId })
+        </td>
+    </tr>
+}
+
+</table>

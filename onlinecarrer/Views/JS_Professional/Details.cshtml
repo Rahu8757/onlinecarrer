@@ -1,0 +1,75 @@
+﻿@model CarrerLib.JobSeeker_Professional
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>JobSeeker_Professional</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.jsKeySkills)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jsKeySkills)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jsPreferredIndustry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jsPreferredIndustry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jsYearOfExperience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jsYearOfExperience)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jsPrevcompName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jsPrevcompName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jsPreviousTitile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jsPreviousTitile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JsPrevJobDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JsPrevJobDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Job_Seeker.jsFullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Job_Seeker.jsFullName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.jsProfID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

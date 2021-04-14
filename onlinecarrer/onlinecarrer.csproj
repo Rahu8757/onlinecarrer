@@ -126,12 +126,25 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\EmpAfterLoginController.cs" />
+    <Compile Include="Controllers\Employeer_RegController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\welcomeController.cs" />
+    <Compile Include="Controllers\Jobs_PostedController.cs" />
+    <Compile Include="Controllers\Job_Seeker_RegController.cs" />
+    <Compile Include="Controllers\JS_ProfessionalController.cs" />
+    <Compile Include="Controllers\LoginEmpController.cs" />
+    <Compile Include="Controllers\LoginJobSeekerController.cs" />
+    <Compile Include="Controllers\WelcomeHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Applymodal.cs" />
+    <Compile Include="Models\Companylogin.cs" />
+    <Compile Include="Models\Emppostjobdt.cs" />
+    <Compile Include="Models\Jobseekerlogin.cs" />
+    <Compile Include="Models\Searchjobmodal.cs" />
+    <Compile Include="Models\SeeAppliedJobmodal.cs" />
+    <Compile Include="Models\SeeEmpapply.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +152,39 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -152,6 +198,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -162,7 +210,6 @@
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="web.jfif" />
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -174,13 +221,49 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Masterlayout.cshtml" />
-    <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\Shared\welcomelayout.cshtml" />
-    <Content Include="Views\welcome\Index.cshtml" />
+    <Content Include="Views\WelcomeHome\Welcome.cshtml" />
+    <Content Include="Views\LoginJobSeeker\Login.cshtml" />
+    <Content Include="Views\Job_Seeker_Reg\Create.cshtml" />
+    <Content Include="Views\Job_Seeker_Reg\Delete.cshtml" />
+    <Content Include="Views\Job_Seeker_Reg\Details.cshtml" />
+    <Content Include="Views\Job_Seeker_Reg\Edit.cshtml" />
+    <Content Include="Views\Job_Seeker_Reg\Index.cshtml" />
+    <Content Include="Views\Employeer_Reg\Create.cshtml" />
+    <Content Include="Views\Employeer_Reg\Delete.cshtml" />
+    <Content Include="Views\Employeer_Reg\Details.cshtml" />
+    <Content Include="Views\Employeer_Reg\Edit.cshtml" />
+    <Content Include="Views\Employeer_Reg\Index.cshtml" />
+    <Content Include="Views\Employeer_Reg\LoginEmpVal.cshtml" />
+    <Content Include="Views\LoginEmp\Login.cshtml" />
+    <Content Include="Views\Job_Seeker_Reg\LoginJSVal.cshtml" />
+    <Content Include="Views\JS_Professional\Create.cshtml" />
+    <Content Include="Views\JS_Professional\Delete.cshtml" />
+    <Content Include="Views\JS_Professional\Details.cshtml" />
+    <Content Include="Views\JS_Professional\Edit.cshtml" />
+    <Content Include="Views\JS_Professional\Index.cshtml" />
+    <Content Include="Views\Jobs_Posted\Create.cshtml" />
+    <Content Include="Views\Jobs_Posted\Delete.cshtml" />
+    <Content Include="Views\Jobs_Posted\Details.cshtml" />
+    <Content Include="Views\Jobs_Posted\Edit.cshtml" />
+    <Content Include="Views\Jobs_Posted\Index.cshtml" />
+    <Content Include="Views\Jobs_Posted\Joblist.cshtml" />
+    <Content Include="Views\Jobs_Posted\Availablejob.cshtml" />
+    <Content Include="Views\Jobs_Posted\Searchjob.cshtml" />
+    <Content Include="Views\Job_Seeker_Reg\AppliedjobbyJs.cshtml" />
+    <Content Include="Views\Shared\Applynotfound.cshtml" />
+    <Content Include="Views\Shared\Nomatchjobfound.cshtml" />
+    <Content Include="Views\EmpAfterLogin\Afterlogin.cshtml" />
+    <Content Include="Views\Jobs_Posted\Seepostedjob.cshtml" />
+    <Content Include="Views\Jobs_Posted\SearchEmployee.cshtml" />
+    <Content Include="Views\Shared\errnojobpos.cshtml" />
+    <Content Include="Views\Shared\errnohasapply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="bin\" />
+    <Folder Include="cv_upload\" />
+    <Folder Include="Views\Job_Posted\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -194,6 +277,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CarrerLib\CarrerLib.csproj">
+      <Project>{8eff5574-b13a-4629-8c6f-2a2f86ccfe69}</Project>
+      <Name>CarrerLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

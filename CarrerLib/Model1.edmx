@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CareerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="compId" />
+          </Key>
+          <Property Name="compId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="compNamae" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="compBranch" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="compAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="compCity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="compState" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="compEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="compPhone" Type="bigint" Nullable="false" />
+          <Property Name="compPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="compUsername" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Job_Seeker">
+          <Key>
+            <PropertyRef Name="jsID" />
+          </Key>
+          <Property Name="jsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jsFullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsPhone" Type="bigint" Nullable="false" />
+          <Property Name="jsDOB" Type="datetime" Nullable="false" />
+          <Property Name="jsCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsState" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsMartialStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsLanguagePreferred" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsResume" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="jsMajor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsUniversity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsInstitute" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jsYearOfGraduation" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jobs_Posted">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyID" Type="int" Nullable="false" />
+          <Property Name="jobIndustry" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="jobKeySkills" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="JobDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobsApplied">
+          <Key>
+            <PropertyRef Name="AppliedJobsID" />
+          </Key>
+          <Property Name="AppliedJobsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jsName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="JobID" Type="int" Nullable="false" />
+          <Property Name="AppliedDate" Type="date" Nullable="false" />
+          <Property Name="cmpid" Type="int" />
+        </EntityType>
+        <EntityType Name="JobSeeker_Professional">
+          <Key>
+            <PropertyRef Name="jsProfID" />
+          </Key>
+          <Property Name="jsProfID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jsID" Type="int" Nullable="false" />
+          <Property Name="jsKeySkills" Type="nvarchar" MaxLength="50" />
+          <Property Name="jsPreferredIndustry" Type="nvarchar" MaxLength="50" />
+          <Property Name="jsYearOfExperience" Type="int" />
+          <Property Name="jsPrevcompName" Type="nvarchar" MaxLength="50" />
+          <Property Name="jsPreviousTitile" Type="nvarchar" MaxLength="50" />
+          <Property Name="JsPrevJobDescription" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_Jobs_Posted_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Jobs_Posted" Type="Self.Jobs_Posted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="compId" />
+            </Principal>
+            <Dependent Role="Jobs_Posted">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobSeeker_Professional_Job_Seeker">
+          <End Role="Job_Seeker" Type="Self.Job_Seeker" Multiplicity="1" />
+          <End Role="JobSeeker_Professional" Type="Self.JobSeeker_Professional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job_Seeker">
+              <PropertyRef Name="jsID" />
+            </Principal>
+            <Dependent Role="JobSeeker_Professional">
+              <PropertyRef Name="jsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="addJobsApplied" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="jsName" Type="nvarchar" Mode="In" />
+          <Parameter Name="jobId" Type="int" Mode="In" />
+          <Parameter Name="dateApply" Type="date" Mode="In" />
+          <Parameter Name="cid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Applyjsdetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cmpid" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="jsFullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jsDOB" Type="datetime" Nullable="false" />
+                <Property Name="jsEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jsCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jsLanguagePreferred" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jsMartialStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jsUniversity" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jsYearOfGraduation" Type="int" Nullable="false" />
+                <Property Name="jsKeySkills" Type="nvarchar" MaxLength="50" />
+                <Property Name="jsPreferredIndustry" Type="nvarchar" MaxLength="50" />
+                <Property Name="jsYearOfExperience" Type="int" />
+                <Property Name="jsPrevcompName" Type="nvarchar" MaxLength="50" />
+                <Property Name="JsPrevJobDescription" Type="nvarchar" MaxLength="500" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="findkeyskills" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="keyskills" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="searchByIndustry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="industryName" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="jobIndustry" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobKeySkills" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="searchByKeySkills" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="keySkills" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="JobId" Type="int" Nullable="false" />
+                <Property Name="jobIndustry" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobKeySkills" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="seeAppliedJobs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="jsName" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Jobid" Type="int" Nullable="false" />
+                <Property Name="compNamae" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobIndustry" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobKeySkills" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="AppliedDate" Type="date" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="seePostedJobs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="compId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="JobId" Type="int" Nullable="false" />
+                <Property Name="companyID" Type="int" Nullable="false" />
+                <Property Name="jobIndustry" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="jobKeySkills" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="JobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="JobDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="CareerModelStoreContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job_Seeker" EntityType="Self.Job_Seeker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jobs_Posted" EntityType="Self.Jobs_Posted" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobsApplied" EntityType="Self.JobsApplied" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobSeeker_Professional" EntityType="Self.JobSeeker_Professional" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Jobs_Posted_Company" Association="Self.FK_Jobs_Posted_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Jobs_Posted" EntitySet="Jobs_Posted" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSeeker_Professional_Job_Seeker" Association="Self.FK_JobSeeker_Professional_Job_Seeker">
+            <End Role="Job_Seeker" EntitySet="Job_Seeker" />
+            <End Role="JobSeeker_Professional" EntitySet="JobSeeker_Professional" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CareerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="compId" />
+          </Key>
+          <Property Name="compId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="compNamae" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="compBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="compAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="compCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="compState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="compEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="compPhone" Type="Int64" Nullable="false" />
+          <Property Name="compPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="compUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Jobs_Posted" Relationship="Self.FK_Jobs_Posted_Company" FromRole="Company" ToRole="Jobs_Posted" />
+        </EntityType>
+        <EntityType Name="Job_Seeker">
+          <Key>
+            <PropertyRef Name="jsID" />
+          </Key>
+          <Property Name="jsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jsFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsPhone" Type="Int64" Nullable="false" />
+          <Property Name="jsDOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="jsCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsMartialStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsLanguagePreferred" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsResume" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsMajor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsUniversity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsInstitute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jsYearOfGraduation" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="JobSeeker_Professional" Relationship="Self.FK_JobSeeker_Professional_Job_Seeker" FromRole="Job_Seeker" ToRole="JobSeeker_Professional" />
+        </EntityType>
+        <EntityType Name="Jobs_Posted">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyID" Type="Int32" Nullable="false" />
+          <Property Name="jobIndustry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="jobKeySkills" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Jobs_Posted_Company" FromRole="Jobs_Posted" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="JobSeeker_Professional">
+          <Key>
+            <PropertyRef Name="jsProfID" />
+          </Key>
+          <Property Name="jsProfID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jsID" Type="Int32" Nullable="false" />
+          <Property Name="jsKeySkills" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="jsPreferredIndustry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="jsYearOfExperience" Type="Int32" />
+          <Property Name="jsPrevcompName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="jsPreviousTitile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JsPrevJobDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Job_Seeker" Relationship="Self.FK_JobSeeker_Professional_Job_Seeker" FromRole="JobSeeker_Professional" ToRole="Job_Seeker" />
+        </EntityType>
+        <Association Name="FK_Jobs_Posted_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Jobs_Posted" Type="Self.Jobs_Posted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="compId" />
+            </Principal>
+            <Dependent Role="Jobs_Posted">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobSeeker_Professional_Job_Seeker">
+          <End Role="Job_Seeker" Type="Self.Job_Seeker" Multiplicity="1" />
+          <End Role="JobSeeker_Professional" Type="Self.JobSeeker_Professional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job_Seeker">
+              <PropertyRef Name="jsID" />
+            </Principal>
+            <Dependent Role="JobSeeker_Professional">
+              <PropertyRef Name="jsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CareerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Job_Seeker" EntityType="Self.Job_Seeker" />
+          <EntitySet Name="Jobs_Posted" EntityType="Self.Jobs_Posted" />
+          <EntitySet Name="JobSeeker_Professional" EntityType="Self.JobSeeker_Professional" />
+          <AssociationSet Name="FK_Jobs_Posted_Company" Association="Self.FK_Jobs_Posted_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Jobs_Posted" EntitySet="Jobs_Posted" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSeeker_Professional_Job_Seeker" Association="Self.FK_JobSeeker_Professional_Job_Seeker">
+            <End Role="Job_Seeker" EntitySet="Job_Seeker" />
+            <End Role="JobSeeker_Professional" EntitySet="JobSeeker_Professional" />
+          </AssociationSet>
+          <EntitySet Name="JobsApplieds" EntityType="CareerModel.JobsApplied" />
+          <FunctionImport Name="addJobsApplied">
+            <Parameter Name="jsName" Mode="In" Type="String" />
+            <Parameter Name="jobId" Mode="In" Type="Int32" />
+            <Parameter Name="dateApply" Mode="In" Type="DateTime" />
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="searchByIndustry" IsComposable="true" ReturnType="Collection(CareerModel.searchByIndustry_Result)">
+          <Parameter Name="industryName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="searchByKeySkills" IsComposable="true" ReturnType="Collection(CareerModel.searchByKeySkills_Result)">
+          <Parameter Name="keySkills" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="findkeyskills">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="keyskills" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="seeAppliedJobs" IsComposable="true" ReturnType="Collection(CareerModel.seeAppliedJobs_Result)">
+          <Parameter Name="jsName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="seePostedJobs" IsComposable="true" ReturnType="Collection(CareerModel.seePostedJobs_Result)">
+          <Parameter Name="compId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Applyjsdetails" IsComposable="true" ReturnType="Collection(CareerModel.Applyjsdetails_Result)">
+            <Parameter Name="cmpid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="JobsApplied">
+          <Key>
+            <PropertyRef Name="AppliedJobsID" />
+          </Key>
+          <Property Name="AppliedJobsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jsName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobID" Type="Int32" Nullable="false" />
+          <Property Name="AppliedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cmpid" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="searchByIndustry_Result">
+          <Property Type="String" Name="jobIndustry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobKeySkills" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobTitle" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobDescription" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="searchByKeySkills_Result">
+          <Property Type="String" Name="jobIndustry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobKeySkills" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobTitle" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobDescription" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="seeAppliedJobs_Result">
+          <Property Type="Int32" Name="Jobid" Nullable="false" />
+          <Property Type="String" Name="compNamae" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobIndustry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobKeySkills" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobTitle" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobDescription" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="AppliedDate" Nullable="false" Precision="10" />
+        </ComplexType>
+        <ComplexType Name="seePostedJobs_Result">
+          <Property Type="Int32" Name="JobId" Nullable="false" />
+          <Property Type="Int32" Name="companyID" Nullable="false" />
+          <Property Type="String" Name="jobIndustry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jobKeySkills" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="JobTitle" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="JobDescription" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Applyjsdetails_Result">
+          <Property Type="String" Name="jsFullName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="jsDOB" Nullable="false" Precision="23" />
+          <Property Type="String" Name="jsEmail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jsCity" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jsLanguagePreferred" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jsMartialStatus" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="jsUniversity" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="jsYearOfGraduation" Nullable="false" />
+          <Property Type="String" Name="jsKeySkills" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="jsPreferredIndustry" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="jsYearOfExperience" Nullable="true" />
+          <Property Type="String" Name="jsPrevcompName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JsPrevJobDescription" Nullable="true" MaxLength="500" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CareerModelStoreContainer" CdmEntityContainer="CareerEntities">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="CareerModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="compId" ColumnName="compId" />
+                <ScalarProperty Name="compNamae" ColumnName="compNamae" />
+                <ScalarProperty Name="compBranch" ColumnName="compBranch" />
+                <ScalarProperty Name="compAddress" ColumnName="compAddress" />
+                <ScalarProperty Name="compCity" ColumnName="compCity" />
+                <ScalarProperty Name="compState" ColumnName="compState" />
+                <ScalarProperty Name="compEmail" ColumnName="compEmail" />
+                <ScalarProperty Name="compPhone" ColumnName="compPhone" />
+                <ScalarProperty Name="compPassword" ColumnName="compPassword" />
+                <ScalarProperty Name="compUsername" ColumnName="compUsername" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Job_Seeker">
+            <EntityTypeMapping TypeName="CareerModel.Job_Seeker">
+              <MappingFragment StoreEntitySet="Job_Seeker">
+                <ScalarProperty Name="jsID" ColumnName="jsID" />
+                <ScalarProperty Name="jsFullName" ColumnName="jsFullName" />
+                <ScalarProperty Name="jsEmail" ColumnName="jsEmail" />
+                <ScalarProperty Name="jsPassword" ColumnName="jsPassword" />
+                <ScalarProperty Name="jsPhone" ColumnName="jsPhone" />
+                <ScalarProperty Name="jsDOB" ColumnName="jsDOB" />
+                <ScalarProperty Name="jsCity" ColumnName="jsCity" />
+                <ScalarProperty Name="jsState" ColumnName="jsState" />
+                <ScalarProperty Name="jsMartialStatus" ColumnName="jsMartialStatus" />
+                <ScalarProperty Name="jsLanguagePreferred" ColumnName="jsLanguagePreferred" />
+                <ScalarProperty Name="jsResume" ColumnName="jsResume" />
+                <ScalarProperty Name="jsMajor" ColumnName="jsMajor" />
+                <ScalarProperty Name="jsUniversity" ColumnName="jsUniversity" />
+                <ScalarProperty Name="jsInstitute" ColumnName="jsInstitute" />
+                <ScalarProperty Name="jsYearOfGraduation" ColumnName="jsYearOfGraduation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs_Posted">
+            <EntityTypeMapping TypeName="CareerModel.Jobs_Posted">
+              <MappingFragment StoreEntitySet="Jobs_Posted">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="jobIndustry" ColumnName="jobIndustry" />
+                <ScalarProperty Name="jobKeySkills" ColumnName="jobKeySkills" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSeeker_Professional">
+            <EntityTypeMapping TypeName="CareerModel.JobSeeker_Professional">
+              <MappingFragment StoreEntitySet="JobSeeker_Professional">
+                <ScalarProperty Name="jsProfID" ColumnName="jsProfID" />
+                <ScalarProperty Name="jsID" ColumnName="jsID" />
+                <ScalarProperty Name="jsKeySkills" ColumnName="jsKeySkills" />
+                <ScalarProperty Name="jsPreferredIndustry" ColumnName="jsPreferredIndustry" />
+                <ScalarProperty Name="jsYearOfExperience" ColumnName="jsYearOfExperience" />
+                <ScalarProperty Name="jsPrevcompName" ColumnName="jsPrevcompName" />
+                <ScalarProperty Name="jsPreviousTitile" ColumnName="jsPreviousTitile" />
+                <ScalarProperty Name="JsPrevJobDescription" ColumnName="JsPrevJobDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobsApplieds">
+            <EntityTypeMapping TypeName="CareerModel.JobsApplied">
+              <MappingFragment StoreEntitySet="JobsApplied">
+                <ScalarProperty Name="cmpid" ColumnName="cmpid" />
+                <ScalarProperty Name="AppliedDate" ColumnName="AppliedDate" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="jsName" ColumnName="jsName" />
+                <ScalarProperty Name="AppliedJobsID" ColumnName="AppliedJobsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="addJobsApplied" FunctionName="CareerModel.Store.addJobsApplied" />
+          <FunctionImportMapping FunctionImportName="searchByIndustry" FunctionName="CareerModel.Store.searchByIndustry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CareerModel.searchByIndustry_Result">
+                <ScalarProperty Name="jobIndustry" ColumnName="jobIndustry" />
+                <ScalarProperty Name="jobKeySkills" ColumnName="jobKeySkills" />
+                <ScalarProperty Name="jobTitle" ColumnName="jobTitle" />
+                <ScalarProperty Name="jobDescription" ColumnName="jobDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="searchByKeySkills" FunctionName="CareerModel.Store.searchByKeySkills">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CareerModel.searchByKeySkills_Result">
+                <ScalarProperty Name="jobIndustry" ColumnName="jobIndustry" />
+                <ScalarProperty Name="jobKeySkills" ColumnName="jobKeySkills" />
+                <ScalarProperty Name="jobTitle" ColumnName="jobTitle" />
+                <ScalarProperty Name="jobDescription" ColumnName="jobDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="findkeyskills" FunctionName="CareerModel.Store.findkeyskills" />
+          <FunctionImportMapping FunctionImportName="seeAppliedJobs" FunctionName="CareerModel.Store.seeAppliedJobs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CareerModel.seeAppliedJobs_Result">
+                <ScalarProperty Name="Jobid" ColumnName="Jobid" />
+                <ScalarProperty Name="compNamae" ColumnName="compNamae" />
+                <ScalarProperty Name="jobIndustry" ColumnName="jobIndustry" />
+                <ScalarProperty Name="jobKeySkills" ColumnName="jobKeySkills" />
+                <ScalarProperty Name="jobTitle" ColumnName="jobTitle" />
+                <ScalarProperty Name="jobDescription" ColumnName="jobDescription" />
+                <ScalarProperty Name="AppliedDate" ColumnName="AppliedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="seePostedJobs" FunctionName="CareerModel.Store.seePostedJobs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CareerModel.seePostedJobs_Result">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="jobIndustry" ColumnName="jobIndustry" />
+                <ScalarProperty Name="jobKeySkills" ColumnName="jobKeySkills" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Applyjsdetails" FunctionName="CareerModel.Store.Applyjsdetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CareerModel.Applyjsdetails_Result">
+                <ScalarProperty Name="jsFullName" ColumnName="jsFullName" />
+                <ScalarProperty Name="jsDOB" ColumnName="jsDOB" />
+                <ScalarProperty Name="jsEmail" ColumnName="jsEmail" />
+                <ScalarProperty Name="jsCity" ColumnName="jsCity" />
+                <ScalarProperty Name="jsLanguagePreferred" ColumnName="jsLanguagePreferred" />
+                <ScalarProperty Name="jsMartialStatus" ColumnName="jsMartialStatus" />
+                <ScalarProperty Name="jsUniversity" ColumnName="jsUniversity" />
+                <ScalarProperty Name="jsYearOfGraduation" ColumnName="jsYearOfGraduation" />
+                <ScalarProperty Name="jsKeySkills" ColumnName="jsKeySkills" />
+                <ScalarProperty Name="jsPreferredIndustry" ColumnName="jsPreferredIndustry" />
+                <ScalarProperty Name="jsYearOfExperience" ColumnName="jsYearOfExperience" />
+                <ScalarProperty Name="jsPrevcompName" ColumnName="jsPrevcompName" />
+                <ScalarProperty Name="JsPrevJobDescription" ColumnName="JsPrevJobDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

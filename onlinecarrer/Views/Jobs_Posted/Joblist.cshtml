@@ -1,0 +1,67 @@
+﻿@model CarrerLib.Jobs_Posted
+
+@{
+    ViewBag.Title = "Joblist";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Joblist</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Jobs_Posted</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.jobIndustry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jobIndustry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jobKeySkills)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jobKeySkills)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.compNamae)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company.compNamae)
+        </dd>
+
+    </dl>
+    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="APPLY" class="btn btn-success" />
+        </div>
+    </div>
+   
+}
+
+

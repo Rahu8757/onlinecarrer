@@ -1,0 +1,48 @@
+﻿@model IEnumerable<onlinecarrer.Models.Searchjobmodal>
+
+@{
+    ViewBag.Title = "Searchjob";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Searchjob</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JobIndustry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobKeySkills)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobIndustry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobKeySkills)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobDescription)
+        </td>
+        
+    </tr>
+}
+
+</table>

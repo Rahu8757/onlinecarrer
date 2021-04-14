@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CarrerLib.Jobs_Posted>
+
+@{
+    ViewBag.Title = "Availablejob";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Availablejob</h2>
+<br />
+
+<h6 >
+    <font face="Lato" color="green" size="3">
+        @Html.ActionLink("See Applied Job", "AppliedjobbyJs", "Job_Seeker_Reg")
+    </font>
+    </h6>
+<h4 align="center">
+    <font face="Lato" color="blue" size="7">
+        Available Job List
+    </font>
+</h4>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.jobIndustry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.jobKeySkills)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company.compNamae)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jobIndustry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jobKeySkills)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.compNamae)
+                </td>
+                <td>
+                    @Html.ActionLink("Apply", "Joblist", new { id = item.JobId, nm=item.Company.compId }, new { @class = "btn btn-success" })
+                    @*<input type="button" class="form-control" value="Apply" name="JobId"  />*@
+
+                </td>
+            </tr>
+        }
+
+    </table>

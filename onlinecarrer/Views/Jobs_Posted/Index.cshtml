@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CarrerLib.Jobs_Posted>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.jobIndustry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jobKeySkills)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company.compNamae)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.jobIndustry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jobKeySkills)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company.compNamae)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.JobId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.JobId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.JobId }) |
+            @Html.ActionLink("Apply", "Joblist", new { id = item.JobId })
+        </td>
+    </tr>
+}
+
+</table>

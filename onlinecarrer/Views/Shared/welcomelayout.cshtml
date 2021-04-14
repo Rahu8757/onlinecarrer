@@ -34,14 +34,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="">
                     <img src="~/images/logo.jfif" width="40"
                          height="30" />
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav ">
-                    <li><a href="#myPage">HOME</a></li>
+                    <li>@Html.ActionLink("HOME", "Welcome", "WelcomeHome")</li>
                     <li><a href="#band">JOB</a></li>
                     <li><a href="#tour">HELP</a></li>
                     <li><a href="#contact">CONTACT</a></li>
@@ -64,7 +64,9 @@
             </div>
         </div>
     </nav>
-
+    <marquee width="100%" behavior="scroll" bgcolor="yellow">
+        Every second new Job posted... please apply soon 
+    </marquee>
 
     @RenderBody()
 

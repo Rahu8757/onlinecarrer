@@ -1,0 +1,112 @@
+﻿@model IEnumerable<CarrerLib.Job_Seeker>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.jsFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsDOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsMartialStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsLanguagePreferred)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsResume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsMajor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsUniversity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsInstitute)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsYearOfGraduation)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsFullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsDOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsMartialStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsLanguagePreferred)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsResume)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsMajor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsUniversity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsInstitute)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsYearOfGraduation)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.jsID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.jsID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.jsID })
+        </td>
+    </tr>
+}
+
+</table>

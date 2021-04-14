@@ -1,0 +1,56 @@
+﻿@model IEnumerable<onlinecarrer.Models.Emppostjobdt>
+
+@{
+    ViewBag.Title = "Seepostedjob";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Seepostedjob</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Jobid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobIndustry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jobkeyskills)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jobdescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jobid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobIndustry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jobkeyskills)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jobdescription)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
+    </tr>
+}
+
+</table>

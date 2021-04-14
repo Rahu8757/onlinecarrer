@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CarrerLib.JobSeeker_Professional>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.jsKeySkills)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsPreferredIndustry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsYearOfExperience)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsPrevcompName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jsPreviousTitile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JsPrevJobDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job_Seeker.jsFullName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsKeySkills)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsPreferredIndustry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsYearOfExperience)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsPrevcompName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jsPreviousTitile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JsPrevJobDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Job_Seeker.jsFullName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.jsProfID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.jsProfID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.jsProfID })
+        </td>
+    </tr>
+}
+
+</table>

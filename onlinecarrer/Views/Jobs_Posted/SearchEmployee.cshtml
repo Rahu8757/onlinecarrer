@@ -1,0 +1,88 @@
+﻿@model IEnumerable<onlinecarrer.Models.SeeEmpapply>
+
+@{
+    ViewBag.Title = "SearchEmployee";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>SearchEmployee</h2>
+
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Jsfullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jsdob)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jsemail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jslanguage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jsmartial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jsuniversity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jsyog)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jsprefeeredind)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jsyoe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jspreviousname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jsprevjobdesc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jsfullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jsdob)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jsemail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jslanguage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jsmartial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jsuniversity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jsyog)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jsprefeeredind)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jsyoe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jspreviousname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jsprevjobdesc)
+        </td>
+       
+    </tr>
+}
+
+</table>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8e76ac53b8a64a7c8134a44a3f8026bb" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="CareerModel.Company" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CareerModel.Job_Seeker" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CareerModel.Jobs_Posted" Width="1.5" PointX="8" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CareerModel.JobSeeker_Professional" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="CareerModel.FK_Jobs_Posted_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="CareerModel.FK_JobSeeker_Professional_Job_Seeker" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CareerModel.JobsApplied" Width="1.5" PointX="3.375" PointY="5.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

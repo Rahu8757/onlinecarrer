@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Afterlogin";
+    Layout = "~/Views/Shared/_Masterlayout.cshtml";
+}
+
+<h2>Afterlogin</h2>
+<br />
+<h6>
+    <font face="Lato" color="green" size="3">
+        @Html.ActionLink("See Your Posted Jobs","Seepostedjob","Jobs_Posted")
+    </font>
+</h6>
+<div>
+    <h1 align="center">
+        <font face="Lato" color="blue" size="8">@Html.ActionLink("Post New Job", "Create", "Jobs_Posted")</font>
+    </h1>
+    <hr />
+    <hr />
+    <h1 align="center">
+        <font face="Lato" color="blue" size="8">@Html.ActionLink("Search Employee", "SearchEmployee", "Jobs_Posted")</font>
+    </h1>
+    <a></a>
+</div>
+
